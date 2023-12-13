@@ -1,6 +1,5 @@
 package sk.uniza.fri.vaadinapp.services;
 
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ public class UserDetailService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public User loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findUserByEmail(email);
 
         if(user == null) {
@@ -37,6 +36,22 @@ public class UserDetailService implements UserDetailsService {
             userRepository.flush();
         } else {
             throw new IllegalArgumentException("User with email " + toBeRegistered.getEmail() + " already exists.");
+        }
+    }
+
+    public void tryUpdateUser(User toBeUpdated) {
+        if (userRepository.findUserById(toBeUpdated.getId()) == null) {
+            throw new IllegalArgumentException("User with id " + toBeUpdated.getId() + " doesnt exists.");
+        } else {
+            userRepository.updateUserWithId(
+                    toBeUpdated.getId(),
+                    toBeUpdated.getEmail(),
+                    toBeUpdated.getFirstName(),
+                    toBeUpdated.getLastName(),
+                    toBeUpdated.getPassword(),
+                    toBeUpdated.getGender(),
+                    toBeUpdated.getRole()
+            );
         }
     }
 

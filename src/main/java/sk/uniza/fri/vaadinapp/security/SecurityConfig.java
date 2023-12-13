@@ -24,6 +24,7 @@ public class SecurityConfig extends VaadinWebSecurity {
         );
         super.configure(http);
         setLoginView(http, LoginView.class);
+        http.formLogin().defaultSuccessUrl("/");
     }
 
     @Bean
