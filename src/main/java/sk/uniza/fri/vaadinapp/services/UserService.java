@@ -7,11 +7,11 @@ import sk.uniza.fri.vaadinapp.models.User;
 import sk.uniza.fri.vaadinapp.repositories.UserRepository;
 
 @Service
-public class UserDetailService implements UserDetailsService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public UserDetailService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

@@ -1,6 +1,7 @@
 package sk.uniza.fri.vaadinapp.forms;
 
 import com.vaadin.flow.component.HasValueAndElement;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -17,14 +18,15 @@ import com.vaadin.flow.data.binder.ValidationResult;
 import com.vaadin.flow.data.binder.ValueContext;
 import sk.uniza.fri.vaadinapp.models.Gender;
 import sk.uniza.fri.vaadinapp.models.User;
-import sk.uniza.fri.vaadinapp.services.UserDetailService;
+import sk.uniza.fri.vaadinapp.services.UserService;
 import sk.uniza.fri.vaadinapp.validators.UniqueEmailValidator;
+import sk.uniza.fri.vaadinapp.views.LoginView;
 
 import java.util.stream.Stream;
 
 public class RegisterForm extends FormLayout {
 
-    private final UserDetailService userService;
+    private final UserService userService;
     private boolean enablePasswordValidation;
 
     private final H3 title = new H3("Registrácia");
@@ -38,7 +40,7 @@ public class RegisterForm extends FormLayout {
     private final Span errorMessageField = new Span();
     private final Button submitButton = new Button("Registruj");
 
-    public RegisterForm(UserDetailService userService) {
+    public RegisterForm(UserService userService) {
         this.userService = userService;
         this.createFrontEnd();
     }
@@ -89,9 +91,12 @@ public class RegisterForm extends FormLayout {
 
         submitButton.addClickListener(event -> {
             try {
-                User userBean = new User();
-                binder.writeBean(userBean);
-                userService.tryRegisterUser(userBean);
+                User toBeRegistered = new User();
+                binder.writeBean(toBeRegistered);
+                toBeRegistered.setRole("USER");
+                userService.tryRegisterUser(toBeRegistered);
+
+                UI.getCurrent().navigate(LoginView.class);
             } catch (ValidationException ignored) {}
         });
     }

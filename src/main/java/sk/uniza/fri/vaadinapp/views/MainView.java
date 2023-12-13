@@ -15,7 +15,7 @@ import jakarta.annotation.security.PermitAll;
 @Route("")
 @PageTitle("Main | Vaadin CRM")
 @PermitAll
-class MainView extends VerticalLayout {
+public class MainView extends VerticalLayout {
 
     public MainView() {
         MenuBar menuBar = new MenuBar();

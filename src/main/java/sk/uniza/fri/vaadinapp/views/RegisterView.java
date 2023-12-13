@@ -4,12 +4,11 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import sk.uniza.fri.vaadinapp.forms.RegisterForm;
-import sk.uniza.fri.vaadinapp.services.UserDetailService;
+import sk.uniza.fri.vaadinapp.services.UserService;
 
 @Route("register")
 @PageTitle("Register | Vaadin CRM")
@@ -18,7 +17,7 @@ public class RegisterView extends HorizontalLayout {
 
     private final RegisterForm registerForm;
 
-    public RegisterView(UserDetailService userService) {
+    public RegisterView(UserService userService) {
         addClassName("login-view");
         setSizeFull();
 

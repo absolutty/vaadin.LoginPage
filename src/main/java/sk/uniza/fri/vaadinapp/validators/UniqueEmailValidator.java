@@ -3,13 +3,13 @@ package sk.uniza.fri.vaadinapp.validators;
 import com.vaadin.flow.data.binder.ValidationResult;
 import com.vaadin.flow.data.binder.ValueContext;
 import com.vaadin.flow.data.validator.AbstractValidator;
-import sk.uniza.fri.vaadinapp.services.UserDetailService;
+import sk.uniza.fri.vaadinapp.services.UserService;
 
 public class UniqueEmailValidator extends AbstractValidator<String> {
 
-    private final UserDetailService userService;
+    private final UserService userService;
 
-    public UniqueEmailValidator(UserDetailService userService) {
+    public UniqueEmailValidator(UserService userService) {
         super("Email already exists in the database");
         this.userService = userService;
     }

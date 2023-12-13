@@ -18,14 +18,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import sk.uniza.fri.vaadinapp.models.Gender;
 import sk.uniza.fri.vaadinapp.models.User;
-import sk.uniza.fri.vaadinapp.services.UserDetailService;
+import sk.uniza.fri.vaadinapp.services.UserService;
 
 @Route("/user")
 @PageTitle("User | Vaadin CRM")
 @PermitAll
 public class UserView extends FormLayout {
 
-    private final UserDetailService userService;
+    private final UserService userService;
     private final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     private final H3 title = new H3("Úprava prihláseného používateľa");
@@ -38,7 +38,7 @@ public class UserView extends FormLayout {
     private final Span errorMessageField = new Span();
     private final Button submitButton = new Button("Ulož zmeny");
 
-    public UserView(UserDetailService userService) {
+    public UserView(UserService userService) {
         this.userService = userService;
 
         addFields();
