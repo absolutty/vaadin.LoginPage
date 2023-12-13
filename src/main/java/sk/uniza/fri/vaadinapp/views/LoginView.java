@@ -1,7 +1,11 @@
 package sk.uniza.fri.vaadinapp.views;
 
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.login.LoginForm;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
@@ -12,19 +16,23 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 @Route("login")
 @PageTitle("Login | Vaadin CRM")
 @AnonymousAllowed
-public class LoginView extends VerticalLayout implements BeforeEnterObserver {
+public class LoginView extends HorizontalLayout implements BeforeEnterObserver {
 
     private final LoginForm login = new LoginForm();
 
     public LoginView(){
         addClassName("login-view");
         setSizeFull();
+
+        Component image = new Image("/VAADIN/login-image.png", "Login image");
+        image.getElement().getStyle().set("width", "475px");
+
         setAlignItems(Alignment.CENTER);
-        setJustifyContentMode(JustifyContentMode.CENTER);
+        setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER);
 
+        add(image, login);
         login.setAction("login");
-
-        add(new H1("Vaadin CRM"), login);
+        login.setForgotPasswordButtonVisible(false);
     }
 
     @Override
