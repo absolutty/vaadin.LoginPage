@@ -23,7 +23,7 @@ public class SecurityConfig extends VaadinWebSecurity {
                 auth.requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/images/*.png")).permitAll()
         );
         super.configure(http);
-        setLoginView(http, LoginView.class);
+        setLoginView(http, LoginView.class, "/logout");
         http.formLogin().defaultSuccessUrl("/");
     }
 
@@ -32,7 +32,7 @@ public class SecurityConfig extends VaadinWebSecurity {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
                 .userDetailsService(userDetailService)
                 .passwordEncoder(passwordEncoder)
-                .and()
+                    .and()
                 .build();
     }
 
