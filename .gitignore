@@ -15,6 +15,7 @@
 
 .mvn/wrapper/
 /src/main/resources/application.properties
+/src/main/dev-bundle/
 
 **/target
 **/error-screenshots
